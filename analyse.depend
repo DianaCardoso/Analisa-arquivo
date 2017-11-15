@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1510761116 source:c:\users\chiqu\documents\analyse\analyse\main.cpp
+	<iostream>
+	<locale.h>
+	<stdio.h>
+	<stdlib.h>
+
