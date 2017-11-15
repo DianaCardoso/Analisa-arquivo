@@ -77,10 +77,25 @@ int funcaoCn(FILE &fp){
 	return contalinha;
 
 }
-/*int funcaoCt(FILE &fp){
+int funcaoCt(FILE &fp, char letra){
+    //Pego a bibliota std e usa as funçoes como padrao.
+    using namespace std;
+	char ch;
+	int contaespecifico = 0;
+
+	//garante que estará no começo do arquivo
+	fseek(&fp, 0, SEEK_SET);
+
+    //enquanto o ch (que pega 1 caracter do arquivo do fp) for diferente dO FINAL DO ARQUIVO, então
+	while( (ch = fgetc(&fp)) != EOF ){
+        if(ch == letra){
+            contaespecifico++;
+		}
+    }
+	return contaespecifico;
 
 }
-int funcaoCo(FILE &fp){
+/*int funcaoCo(FILE &fp){
 
 }
 int funcaoDo(FILE &fp){
@@ -101,9 +116,11 @@ int main(int argc, char** argv) {
             exit(1);
 		}
     //se a pessoa digitar uma dessas opções, então ele precisa passar 4 parâmetros
-	}else if((argv[1] == "CT") || (argv[1] == "CO") || (argv[1] == "DO")){
-			argc != 4;
-			exit(2);
+	}else if((opcao == "CT") || (opcao == "CO") || (opcao == "DO")){
+			if(argc != 4){
+                printf("Você precisa passar 4 parâmetros");
+                exit(2);
+			}
     //se ele digitar qualquer coisa fora das opções então é inválido
 	}else{
 		printf("%s", argv[1]);
@@ -119,6 +136,7 @@ int main(int argc, char** argv) {
     printf("%d\n", funcaoCc(*fp));
     printf("%d\n", funcaoCd(*fp));
     printf("%d\n", funcaoCn(*fp));
+    printf("%d\n", funcaoCt(*fp, *argv[3]));
 
 
 
