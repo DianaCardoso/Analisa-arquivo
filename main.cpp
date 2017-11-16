@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+using namespace std;
+
 //função Conta Letra
-int funcaoCl(FILE &fp){
+/*int funcaoCl(FILE &fp){
     //Pego a bibliota std e usa as funçoes como padrao.
     using namespace std;
 	char ch;
@@ -21,7 +23,7 @@ int funcaoCl(FILE &fp){
 		}
     }
 	return contaletra;
-}
+}*/
 
 int funcaoCc(FILE &fp){
     using namespace std;
@@ -95,10 +97,20 @@ int funcaoCt(FILE &fp, char letra){
 	return contaespecifico;
 
 }
-/*int funcaoCo(FILE &fp){
+
+void funcaoCo(FILE &fp, string novo){
+
+    char* tmp[100];
+    int result;
+
+    char ch = fgetc(&fp);
+
+    result = fread(&tmp[0], sizeof(char), 100, &fp);
+    cout << result << endl;
+
 
 }
-int funcaoDo(FILE &fp){
+/*int funcaoDo(FILE &fp){
 
 }*/
 
@@ -108,6 +120,7 @@ int main(int argc, char** argv) {
 
 	FILE *fp; //abre arquivo
 	string opcao = argv[1];
+	char leitura;
 
     //se a pessoa digitar um desses comandos, então ele precisa passar 3 parâmetros
 	if((opcao == "CL") || (opcao == "CC") || (opcao == "CD") || (opcao == "CN")){
@@ -126,21 +139,39 @@ int main(int argc, char** argv) {
 		printf("%s", argv[1]);
 		exit(3);
 	}
-    //abre o arquivo e verifica se ele existe.
-	if((fp = fopen(argv[2], "r")) == NULL){
-		printf("Arquivo não pode ser aberto\n");
-		exit(1);
+
+	if ((opcao == "CO") || (opcao == "DO")){
+        leitura = 'b';
+	}else{
+        leitura = 't';
 	}
 
-    printf("%d\n", funcaoCl(*fp));
+    //abre o arquivo e verifica se ele existe.
+    if(leitura == 'b'){
+        if((fp = fopen(argv[2], "rb")) == NULL){
+		printf("Arquivo não pode ser aberto\n");
+		exit(1);
+        }
+    }else{
+        if((fp = fopen(argv[2], "rt")) == NULL){
+		printf("Arquivo não pode ser aberto\n");
+		exit(1);
+        }
+    }
+
+
+
+    /*printf("%d\n", funcaoCl(*fp));
     printf("%d\n", funcaoCc(*fp));
     printf("%d\n", funcaoCd(*fp));
     printf("%d\n", funcaoCn(*fp));
-    printf("%d\n", funcaoCt(*fp, *argv[3]));
+    printf("%d\n", funcaoCt(*fp, *argv[3]));*/
+    funcaoCo(*fp, argv[3]);
 
 
 
 
+    fclose(fp);
     //Caso a pessoa digite qualquer opção válida, então ele vai para a funçao chamada.
 	/*switch (6){
 		case "CL" : funcaoCl(fp); break;
