@@ -6,7 +6,7 @@
 using namespace std;
 
 //função Conta Letra
-/*int funcaoCl(FILE &fp){
+int funcaoCl(FILE &fp){
     //Pego a bibliota std e usa as funçoes como padrao.
     using namespace std;
 	char ch;
@@ -23,7 +23,7 @@ using namespace std;
 		}
     }
 	return contaletra;
-}*/
+}
 
 int funcaoCc(FILE &fp){
     using namespace std;
@@ -98,21 +98,32 @@ int funcaoCt(FILE &fp, char letra){
 
 }
 
-void funcaoCo(FILE &fp, string novo){
+/*void funcaoCo(string velho, string novo){
 
-    char* tmp[100];
-    int result;
+    FILE* batman;
+    //Declarando uma string contendo o comando de copia que precisará executar
+    string comando = "copy " + velho + " " + novo;
+    //Converte a string de c++ para string de c e executa o comando no prompt
+    system(comando.c_str());
 
-    char ch = fgetc(&fp);
-
-    result = fread(&tmp[0], sizeof(char), 100, &fp);
-    cout << result << endl;
+    batman = fopen(novo.c_str(), "rb");
+    fr
 
 
+
+    fclose(batman);
 }
-/*int funcaoDo(FILE &fp){
+int funcaoDo(FILE &fp){
 
 }*/
+
+int trocachar(string opcoes){
+
+    return (int)opcoes.at(1);
+
+}
+
+
 
 int main(int argc, char** argv) {
     using namespace std;
@@ -165,24 +176,23 @@ int main(int argc, char** argv) {
     printf("%d\n", funcaoCc(*fp));
     printf("%d\n", funcaoCd(*fp));
     printf("%d\n", funcaoCn(*fp));
-    printf("%d\n", funcaoCt(*fp, *argv[3]));*/
-    funcaoCo(*fp, argv[3]);
+    printf("%d\n", funcaoCt(*fp, *argv[3]));
+    funcaoCo(argv[2], argv[3]);*/
 
 
 
 
-    fclose(fp);
     //Caso a pessoa digite qualquer opção válida, então ele vai para a funçao chamada.
-	/*switch (6){
-		case "CL" : funcaoCl(fp); break;
-		case "CC" : funcaoCc(fp); break;
-		case "CD" : funcaoCd(fp); break;
-		case "CN" : funcaoCn(fp); break;
-		case "CT" : funcaoCt(fp); break;
-		case "CO" : funcaoCo(fp); break;
+	switch ((int) trocachar(opcao)){
+		case 76: printf("%d\n", funcaoCl(*fp)); break;
+		case 67: printf("%d\n", funcaoCc(*fp)); break;
+		case 68: printf("%d\n", funcaoCd(*fp)); break;
+		case 78: printf("%d\n", funcaoCn(*fp)); break;
+		case 84: printf("%d\n", funcaoCt(*fp, *argv[3])); break;
+		/*case "CO" : funcaoCo(fp); break;
 		case "DO" : funcaoDo(fp); break;
-		default : printf("Opção inválida!");
-	}*/
-
+		default : printf("Opção inválida!");*/
+	}
+    fclose(fp);
 	return 0;
 }
